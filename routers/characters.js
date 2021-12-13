@@ -29,11 +29,23 @@ router.get("/", async (req, res, next) => {
 
       const characterObjects = await Promise.all(characterListRequests);
 
-      const filmCharactersList = characterObjects.map(
-        (eachCharacter) => eachCharacter.data.name
-      );
+      if (gender) {
+        const filteredCharacterObjects = characterObjects.filter(
+          (eachCharacterObject) => eachCharacterObject.data.gender === gender
+        );
 
-      res.send(filmCharactersList);
+        filteredFilmCharactersList = filteredCharacterObjects.map(
+          (eachCharacter) => eachCharacter.data.name
+        );
+
+        res.send(filteredFilmCharactersList);
+      } else {
+        const filmCharactersList = characterObjects.map(
+          (eachCharacter) => eachCharacter.data.name
+        );
+
+        res.send(filmCharactersList);
+      }
     } else {
       const allCharactersData = await axios.get(`${apiUrl}/people`);
 
