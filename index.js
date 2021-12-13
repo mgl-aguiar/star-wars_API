@@ -4,8 +4,8 @@ const { port } = require("./constants");
 
 app.use(express.json());
 
-const characterRouter = require("./routers/character");
+const charactersRouter = require("./routers/characters");
 
-app.use("/character", characterRouter);
+app.use("/characters", charactersRouter);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
