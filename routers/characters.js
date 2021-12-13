@@ -34,7 +34,7 @@ router.get("/", async (req, res, next) => {
           (eachCharacterObject) => eachCharacterObject.data.gender === gender
         );
 
-        filteredFilmCharactersList = filteredCharacterObjects.map(
+        const filteredFilmCharactersList = filteredCharacterObjects.map(
           (eachCharacter) => eachCharacter.data.name
         );
 
