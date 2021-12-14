@@ -16,7 +16,7 @@ router.get("/all", async (req, res, next) => {
 
 // get list of characters from a specified film
 router.get("/", async (req, res, next) => {
-  const { search, gender } = req.query;
+  const { search, gender, page } = req.query;
 
   try {
     if (search) {
@@ -47,7 +47,9 @@ router.get("/", async (req, res, next) => {
         res.send(filmCharactersList);
       }
     } else {
-      const allCharactersData = await axios.get(`${apiUrl}/people`);
+      const allCharactersData = await axios.get(
+        `${apiUrl}/people/?page=${!page ? 1 : page}`
+      );
 
       const allCharactersObjects = allCharactersData.data.results;
 
