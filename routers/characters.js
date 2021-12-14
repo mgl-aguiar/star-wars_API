@@ -33,9 +33,11 @@ router.get("/", async (req, res, next) => {
 
     if (gender) {
       characterObjects = characterObjects.filter(
-        (eachCharacterObject) => eachCharacterObject.data.gender === gender
+        (eachCharacterObject) => eachCharacterObject.gender === gender
       );
     }
+
+    res.send(characterObjects);
   } catch (error) {
     next(error);
   }
