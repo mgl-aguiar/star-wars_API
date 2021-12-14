@@ -4,31 +4,27 @@ const axios = require("axios");
 
 const { apiUrl } = require("../constants");
 
-// get list of planets
+// fetch planets by climate search term
 router.get("/", async (req, res, next) => {
-  const { climate } = req.query;
+  const { climate, page } = req.query;
 
   try {
     const planets = await axios.get(`${apiUrl}/planets`);
-    const planetsObjects = planets.data.results;
+    let planetsArray = planets.data.results;
 
     if (climate) {
-      const filteredPlanetObjects = planetsObjects.filter(
-        (eachPlanet) => eachPlanet.climate === climate
+      planetsArray = planetsArray.filter((eachPlanet) =>
+        eachPlanet.climate.split(", ").includes(climate)
       );
-
-      const filteredPlanetList = filteredPlanetObjects.map(
-        (eachPlanet) => eachPlanet.name
-      );
-
-      res.send(filteredPlanetList);
     } else {
-      const allPlanetsList = planetsObjects.map(
-        (eachPlanetObject) => eachPlanetObject.name
+      const allPlanets = await axios.get(
+        `${apiUrl}/planets/?page=${!page ? 1 : page}`
       );
 
-      res.send(allPlanetsList);
+      planetsArray = allPlanets.data.results;
     }
+
+    res.send(planetsArray);
   } catch (error) {
     next(error);
   }
