@@ -5,7 +5,7 @@ const axios = require("axios");
 const { apiUrl } = require("../constants");
 
 router.get("/", async (req, res, next) => {
-  const { search, gender, page } = req.query;
+  const { search, gender, sort, page } = req.query;
 
   try {
     let characterObjects = null;
@@ -34,6 +34,22 @@ router.get("/", async (req, res, next) => {
     if (gender) {
       characterObjects = characterObjects.filter(
         (eachCharacterObject) => eachCharacterObject.gender === gender
+      );
+    }
+
+    if (sort && sort === "heightAsc") {
+      characterObjects.sort((a, b) => a.height - b.height);
+    } else if (sort && sort === "heightDesc") {
+      characterObjects.sort((a, b) => b.height - a.height);
+    }
+
+    if (sort && sort === "ageAsc") {
+      characterObjects.sort(
+        (a, b) => parseFloat(a.birth_year) - parseFloat(b.birth_year)
+      );
+    } else if (sort && sort === "ageDesc") {
+      characterObjects.sort(
+        (a, b) => parseFloat(b.birth_year) - parseFloat(a.birth_year)
       );
     }
 
