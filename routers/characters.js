@@ -53,10 +53,22 @@ router.get("/", async (req, res, next) => {
       );
     }
 
-    res.send(characterObjects);
+    res.send(paginate(characterObjects, page));
   } catch (error) {
     next(error);
   }
 });
+
+function paginate(dataToSend, page) {
+  const currentPage = !page ? 1 : page;
+  const limit = 30;
+
+  const startIndex = (currentPage - 1) * limit;
+  const endIndex = currentPage * limit;
+
+  const paginatedResults = dataToSend.slice(startIndex, endIndex);
+
+  return paginatedResults;
+}
 
 module.exports = router;
