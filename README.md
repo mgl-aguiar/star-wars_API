@@ -47,7 +47,7 @@ Example: fetching all female character from "The Empire Strikes Back"
 
 Sorting can be done using the <i>?sortByAge=</i> and the <i>?sortByHeight=</i> queries.
 
-Input can be either 'asc' for ascending order, ir 'desc' for descending order.
+Input can be either 'asc' for ascending order, or 'desc' for descending order.
 
 Example: fetching characters from "Return of the Jedi" and sorting by ascending height
 
