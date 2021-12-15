@@ -21,6 +21,8 @@ Or, for development purposes:
 
 # Endpoints
 
+The code for the endpoints are organized in seperate router files, check out the router folder for their specific implementation.
+
 ## Characters endpoint:
 
 To fetch characters from a movie, search for a word or more from the movie title using the <i>?search=</i> query:
