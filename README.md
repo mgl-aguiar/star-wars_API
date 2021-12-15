@@ -1,6 +1,6 @@
 # Summary
 
-This is a Star Wars API to search for characters from specific movies or to search for planets according to climate type. <br>
+This is a Star Wars API to search for characters from specific movies or to search for planets according to climate type.
 The data is fetched from the [SWAPI](https://swapi.py4e.com/) Star Wars API.
 
 # Setup
